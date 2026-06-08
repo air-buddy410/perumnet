@@ -1,0 +1,81 @@
+import { NextResponse } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase";
+import { resend } from "@/lib/resend";
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+
+    const { name, email, phone, message } = body;
+
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Name, email, and message are required.",
+        },
+        { status: 400 }
+      );
+    }
+
+    const { error } = await supabaseAdmin.from("inquiries").insert({
+      name,
+      email,
+      phone,
+      message,
+    });
+
+    if (error) {
+      console.error("Supabase error:", error);
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Failed to save inquiry.",
+        },
+        { status: 500 }
+      );
+    }
+
+    await resend.emails.send({
+      from: "Maharani Internet <onboarding@resend.dev>",
+      to: email,
+      subject: "Terima kasih telah menghubungi Maharani Internet",
+      html: `
+        <h2>Halo ${name},</h2>
+        <p>Terima kasih telah menghubungi Maharani Internet.</p>
+        <p>Tim kami akan segera menghubungi Anda melalui email atau telepon.</p>
+        <br/>
+        <p>Salam,<br/>Maharani Internet</p>
+      `,
+    });
+
+    await resend.emails.send({
+      from: "Maharani Internet <onboarding@resend.dev>",
+      to: process.env.ADMIN_EMAIL!,
+      subject: `Lead Baru dari Website - ${name}`,
+      html: `
+        <h2>Lead Baru dari Website</h2>
+        <p><strong>Nama:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Telepon:</strong> ${phone || "-"}</p>
+        <p><strong>Pesan:</strong> ${message}</p>
+      `,
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: "Inquiry saved and email sent successfully.",
+    });
+  } catch (error) {
+    console.error("Contact API error:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Something went wrong.",
+      },
+      { status: 500 }
+    );
+  }
+}

@@ -1,8 +1,44 @@
+"use client";
+
+import { useState } from "react";
+
 import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { siteConfig } from "@/data/site";
 
 export function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Pesan berhasil dikirim!");
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    }
+  };
+
   return (
     <section id="contact" className="bg-slate-50 px-4 py-20 scroll-mt-24">
       <div className="mx-auto max-w-7xl">
@@ -18,7 +54,7 @@ export function ContactSection() {
               Kirim Pesan
             </h3>
 
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">
                   Nama Lengkap
@@ -26,6 +62,10 @@ export function ContactSection() {
                 <input
                   type="text"
                   placeholder="Masukkan nama Anda"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-transparent focus:ring-2 focus:ring-green-500"
                 />
               </div>
@@ -37,6 +77,10 @@ export function ContactSection() {
                 <input
                   type="email"
                   placeholder="email@example.com"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-transparent focus:ring-2 focus:ring-green-500"
                 />
               </div>
@@ -48,6 +92,10 @@ export function ContactSection() {
                 <input
                   type="tel"
                   placeholder="08xx-xxxx-xxxx"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
                   className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-transparent focus:ring-2 focus:ring-green-500"
                 />
               </div>
@@ -59,6 +107,10 @@ export function ContactSection() {
                 <textarea
                   rows={4}
                   placeholder="Tuliskan pesan Anda di sini..."
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   className="w-full resize-none rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-transparent focus:ring-2 focus:ring-green-500"
                 />
               </div>
