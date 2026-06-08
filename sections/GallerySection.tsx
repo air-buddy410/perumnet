@@ -7,7 +7,7 @@ const images = [
 
 export function GallerySection() {
   return (
-    <section id="gallery" className="bg-[#f7f2ea] px-6 py-24">
+    <section id="gallery" className="bg-[#f7f2ea] px-6 py-24 scroll-mt-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <p className="mb-4 text-sm uppercase tracking-[0.3em] text-stone-500">

@@ -18,7 +18,7 @@ const rooms = [
 
 export function RoomsSection() {
   return (
-    <section id="rooms" className="bg-white px-6 py-24">
+    <section id="rooms" className="bg-white px-6 py-24 scroll-mt-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <p className="mb-4 text-sm uppercase tracking-[0.3em] text-stone-500">
