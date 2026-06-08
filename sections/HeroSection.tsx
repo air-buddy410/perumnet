@@ -11,7 +11,7 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="grid items-center gap-12 md:grid-cols-2">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
             <div className="mb-6 inline-block rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
               🚀 Koneksi Cepat, Harga Sahabat – Dari Desa Membangun Negeri
