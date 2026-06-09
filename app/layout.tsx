@@ -13,9 +13,41 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Maharani Internet - Provider Internet Cepat & Terpercaya",
+  title: "PerumNet | Internet Fiber Optic Cepat & Stabil",
   description:
-    "Maharani Internet menyediakan layanan internet cepat, stabil, dan terpercaya untuk kebutuhan rumah dan bisnis.",
+    "PerumNet menyediakan layanan internet fiber optic cepat, stabil, dan terpercaya untuk kebutuhan rumah, bisnis, dan komunitas. Hubungi kami untuk pemasangan internet sekarang.",
+  keywords: [
+    "PerumNet",
+    "Internet Fiber Optic",
+    "Internet Rumah",
+    "Internet Bisnis",
+    "Provider Internet",
+    "ISP Bali",
+    "Internet Bali",
+    "Internet Karangasem",
+    "Internet Kubu",
+    "Internet Tianyar",
+    "Wifi Rumah",
+    "Wifi Kantor",
+  ],
+  authors: [
+    {
+      name: "PerumNet",
+    },
+  ],
+  openGraph: {
+    title: "PerumNet | Internet Fiber Optic Cepat & Stabil",
+    description:
+      "Internet fiber optic cepat, stabil, dan terpercaya untuk rumah dan bisnis.",
+    images: [
+      {
+        url: "/images/perumnet-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "PerumNet Internet Fiber Optic",
+      },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
