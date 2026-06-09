@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
 import { resend } from "@/lib/resend";
 
 export async function POST(req: Request) {
@@ -18,20 +17,36 @@ export async function POST(req: Request) {
       );
     }
 
-    const { error } = await supabaseAdmin.from("inquiries").insert({
-      name,
-      email,
-      phone,
-      message,
-    });
+    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
 
-    if (error) {
-      console.error("Supabase error:", error);
-
+    if (!googleScriptUrl) {
       return NextResponse.json(
         {
           success: false,
-          message: "Failed to save inquiry.",
+          message: "Google Script URL is not configured.",
+        },
+        { status: 500 }
+      );
+    }
+
+    const sheetResponse = await fetch(googleScriptUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone: phone || "",
+        message,
+      }),
+    });
+
+    if (!sheetResponse.ok) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Failed to save inquiry to Google Sheet.",
         },
         { status: 500 }
       );
@@ -65,7 +80,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Inquiry saved and email sent successfully.",
+      message: "Inquiry saved to Google Sheet and email sent successfully.",
     });
   } catch (error) {
     console.error("Contact API error:", error);
