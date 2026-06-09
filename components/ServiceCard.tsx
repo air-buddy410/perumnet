@@ -4,33 +4,22 @@ type ServiceCardProps = {
   title: string;
   description: string;
   icon: LucideIcon;
-  variant?: "green" | "orange";
 };
 
 export function ServiceCard({
   title,
   description,
   icon: Icon,
-  variant = "green",
 }: ServiceCardProps) {
-  const gradient =
-    variant === "orange"
-      ? "from-orange-500 to-orange-600"
-      : "from-green-500 to-emerald-600";
-
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-2xl">
-      <div
-        className={`mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${gradient}`}
-      >
+    <div className="group rounded-3xl border border-[#00a79d]/10 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#00a79d] transition-transform duration-300 group-hover:scale-110">
         <Icon className="h-8 w-8 text-white" />
       </div>
 
       <h3 className="mb-3 text-xl font-bold text-slate-900">{title}</h3>
 
-      <p className="leading-relaxed text-slate-600">{description}</p>
-
-      <div className="mt-6 border-t border-slate-100 pt-6" />
+      <p className="leading-7 text-[#556679]">{description}</p>
     </div>
   );
 }

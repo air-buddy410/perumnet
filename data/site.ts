@@ -1,11 +1,15 @@
-// src/data/site.ts
-
 export const siteConfig = {
-  name: "Maharani Internet",
-  phone: "085739384422",
+  name: "PerumNet",
+  phone: "085333521369",
+  whatsapp: "6285333521369",
   email: "cvmaharanikomputerdanjaringan@gmail.com",
   address:
     "BANJAR DINAS DARMA WINANGUN, Desa/Kelurahan Tianyar, Kec. Kubu, Kab. Karangasem, Provinsi Bali, Kode Pos: 80853",
+};
+
+export const brandColors = {
+  primary: "#00a79d",
+  secondary: "#556679",
 };
 
 export const navItems = [
@@ -15,110 +19,107 @@ export const navItems = [
   { label: "Kontak", href: "#contact" },
 ];
 
-export const heroFeatures = [
-  "Kecepatan Tinggi",
-  "Keamanan Terjamin",
-  "Support 24/7",
-];
+export const heroFeatures = ["Internet Stabil", "Fiber Optic", "Support Cepat"];
 
 export const services = [
   {
     title: "Internet Rumah",
     description:
-      "Paket internet untuk kebutuhan keluarga dengan kecepatan stabil untuk streaming, gaming, dan browsing.",
+      "Layanan internet stabil untuk kebutuhan keluarga, belajar, bekerja, streaming, dan hiburan di rumah.",
   },
   {
-    title: "Internet Bisnis",
+    title: "Internet Fiber Optic",
     description:
-      "Solusi internet dedicated untuk kantor dan bisnis dengan bandwidth unlimited dan prioritas support.",
+      "Koneksi internet berbasis fiber optic dengan kecepatan tinggi dan performa yang lebih stabil.",
   },
   {
-    title: "WiFi Solutions",
+    title: "WiFi Rumah",
     description:
-      "Instalasi dan konfigurasi WiFi untuk coverage optimal di seluruh area rumah atau kantor Anda.",
+      "Solusi WiFi untuk rumah agar koneksi dapat digunakan dengan nyaman di berbagai perangkat.",
   },
   {
-    title: "CCTV",
+    title: "WiFi Kantor",
     description:
-      "Layanan pemasangan dan maintenance CCTV berkualitas tinggi yang dapat dipantau dari smartphone Anda kapan saja.",
+      "Layanan internet dan jaringan untuk kebutuhan kantor, usaha kecil, dan operasional bisnis.",
   },
   {
-    title: "Fiber Optic",
+    title: "Maintenance Jaringan",
     description:
-      "Teknologi fiber optik terbaru untuk kecepatan internet hingga 1 Gbps dengan latency minimal.",
+      "Bantuan pengecekan dan perbaikan jaringan agar koneksi tetap berjalan dengan optimal.",
   },
   {
-    title: "Customer Support",
+    title: "Support Pelanggan",
     description:
-      "Tim technical support profesional dari Maharani Internet siap membantu Anda 24/7 melalui telepon, email, atau WhatsApp.",
+      "Tim PerumNet siap membantu pelanggan melalui telepon atau WhatsApp untuk kebutuhan layanan internet.",
   },
 ];
 
 export const packages = [
   {
-    name: "Paket 1",
+    name: "Personal",
     speed: "27 Mbps",
-    price: "Rp 176.000",
+    price: "Rp 175.000",
     popular: false,
     features: [
+      "Paket Personal",
       "Kecepatan hingga 27 Mbps",
-      "Unlimited Download",
-      "Cocok untuk 2-3 device",
-      "Streaming HD",
-      "Registrasi GRATIS!",
+      "Harga bulanan Rp 175.000",
+      "Registrasi Rp 50.000",
+      "Wajib 3 bulan di awal",
+      "Total awal Rp 575.000",
     ],
-    note: "Khusus Paket 1 menggunakan sistem pembayaran di muka.",
+    note: "Paket Personal menggunakan pembayaran awal 3 bulan + registrasi.",
   },
   {
-    name: "Paket 2",
+    name: "Berdua",
     speed: "47 Mbps",
     price: "Rp 225.000",
     popular: true,
     features: [
+      "Paket Berdua",
       "Kecepatan hingga 47 Mbps",
-      "Unlimited Download",
-      "Cocok untuk 3-5 device",
-      "Streaming 4K",
-      "Registrasi GRATIS!",
+      "Harga bulanan Rp 225.000",
+      "Registrasi Gratis",
+      "Total awal Rp 225.000",
     ],
   },
   {
-    name: "Paket 3",
+    name: "Keluarga",
     speed: "77 Mbps",
     price: "Rp 275.000",
     popular: false,
     features: [
+      "Paket Keluarga",
       "Kecepatan hingga 77 Mbps",
-      "Unlimited Download",
-      "Cocok untuk 5-7 device",
-      "Gaming low latency",
-      "Registrasi GRATIS!",
+      "Harga bulanan Rp 275.000",
+      "Registrasi Gratis",
+      "Total awal Rp 275.000",
     ],
   },
   {
-    name: "Paket 4",
-    speed: "127 Mbps",
+    name: "Natah",
+    speed: "107 Mbps",
     price: "Rp 325.000",
     popular: false,
     features: [
-      "Kecepatan hingga 127 Mbps",
-      "Unlimited Download",
-      "Cocok untuk 7-10 device",
-      "Multi-user conference",
-      "Registrasi GRATIS!",
+      "Paket Natah",
+      "Kecepatan hingga 107 Mbps",
+      "Harga bulanan Rp 325.000",
+      "Registrasi Gratis",
+      "Total awal Rp 325.000",
     ],
   },
   {
-    name: "Paket 5",
+    name: "Banjar",
     speed: "177 Mbps",
-    price: "Rp 450.000",
+    price: "Rp 500.000",
     popular: false,
     features: [
+      "Paket Banjar",
       "Kecepatan hingga 177 Mbps",
-      "Unlimited Download",
-      "Cocok untuk 10+ device",
-      "Heavy streaming & gaming",
-      "Registrasi GRATIS!",
+      "Harga bulanan Rp 500.000",
+      "Registrasi Gratis",
+      "Total awal Rp 500.000",
     ],
   },
 ];

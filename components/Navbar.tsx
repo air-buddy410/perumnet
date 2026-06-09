@@ -7,12 +7,14 @@ export function Navbar() {
       <nav className="mx-auto max-w-7xl px-4 py-4">
         <div className="flex items-center justify-between">
           <a href="#" className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-600 text-lg font-bold text-white">
-              M
-            </div>
+            <img
+              src="/images/perumnet-logo.png"
+              alt="PerumNet"
+              className="h-12 w-auto"
+            />
 
             <span className="text-xl font-bold text-slate-900">
-              Maharani<span className="text-orange-500">Internet</span>
+              Perum<span className="text-[#00a79d]">Net</span>
             </span>
           </a>
 
@@ -21,7 +23,7 @@ export function Navbar() {
               <a
                 key={item.href}
                 href={item.href}
-                className="font-medium text-slate-700 transition-colors hover:text-orange-500"
+                className="font-medium text-[#556679] transition-colors hover:text-[#00a79d]"
               >
                 {item.label}
               </a>
@@ -29,14 +31,16 @@ export function Navbar() {
 
             <a
               href={`https://wa.me/62${siteConfig.phone.slice(1)}`}
-              className="rounded-md bg-gradient-to-r from-green-500 to-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:from-green-600 hover:to-emerald-700"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-md bg-[#00a79d] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#008d84]"
             >
               Hubungi Kami
             </a>
           </div>
 
           <button className="p-2 md:hidden">
-            <Menu className="h-6 w-6 text-slate-900" />
+            <Menu className="h-6 w-6 text-[#556679]" />
           </button>
         </div>
       </nav>
