@@ -4,7 +4,9 @@ export const siteConfig = {
   phone: "0853-3352-1369",
   whatsapp: "6285333521369",
   adminPhone: "0857-3718-0398",
-  address: "BTN Kecicang Indah Blok A5, Bungaya Kangin, Karangasem Bali 80813",
+  adminWhatsapp: "6285737180398",
+  address:
+    "Kantor Layanan: BTN Kecicang Indah Blok A5, Bungaya Kangin, Karangasem Bali 80813",
 };
 
 export const brandColors = {
