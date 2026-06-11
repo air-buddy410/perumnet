@@ -14,7 +14,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="scroll-mt-24 relative overflow-hidden bg-gradient-to-br from-[#00a79d] via-[#00998f] to-[#007f78] px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-32"
+      className="relative scroll-mt-24 overflow-hidden bg-gradient-to-br from-[#00a79d] via-[#00998f] to-[#007f78] px-5 pb-16 pt-28 md:px-8 md:pb-20 md:pt-32"
     >
       <div className="absolute inset-0 opacity-10">
         <div className="h-full w-full bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] bg-[length:40px_40px]" />
@@ -39,7 +39,7 @@ export function HeroSection() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="mb-5 inline-block rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm"
             >
-              🚀 {siteConfig.name} • Internet Fiber Optik Bali
+              🚀 {siteConfig.name} • Internet Fiber Optik Bali Timur
             </motion.div>
 
             <motion.h1
@@ -47,9 +47,9 @@ export function HeroSection() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="mb-6 text-4xl font-bold leading-tight text-white md:text-6xl"
             >
-              Internet Fiber Optik
+              Provider Internet
               <span className="block text-[#d7f8f5]">
-                Cepat, Stabil & Terjangkau
+                Fiber Optik Terpercaya
               </span>
             </motion.h1>
 
@@ -58,9 +58,9 @@ export function HeroSection() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="mb-6 text-base leading-relaxed text-white/90 md:text-lg"
             >
-              Nikmati koneksi internet fiber optic yang cepat, stabil, dan
-              terpercaya untuk kebutuhan rumah, bisnis, sekolah, streaming,
-              gaming, dan aktivitas online sehari-hari.
+              PerumNet menghadirkan layanan internet cepat, stabil, dan
+              terjangkau untuk rumah, bisnis, dan kebutuhan digital Anda di Bali
+              Timur.
             </motion.p>
 
             <motion.div
@@ -68,7 +68,7 @@ export function HeroSection() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="mb-8 flex flex-wrap gap-3"
             >
-              {["✓ Unlimited", "✓ Fiber Optic", "✓ Support 24/7"].map(
+              {["✓ Fiber Optik", "✓ Bali Timur", "✓ Support Cepat"].map(
                 (item) => (
                   <span
                     key={item}
@@ -109,8 +109,8 @@ export function HeroSection() {
             >
               {[
                 { label: "Internet Stabil", icon: Zap },
-                { label: "Fiber Optic", icon: Shield },
-                { label: "Support 24/7", icon: Clock },
+                { label: "Fiber Optik", icon: Shield },
+                { label: "Support Cepat", icon: Clock },
               ].map((item) => {
                 const Icon = item.icon;
 
@@ -141,7 +141,7 @@ export function HeroSection() {
             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <Image
                 src="/images/hero2.jpg"
-                alt="PerumNet Internet Fiber Optic"
+                alt="PerumNet Internet Fiber Optik"
                 width={1200}
                 height={800}
                 priority
@@ -164,12 +164,10 @@ export function HeroSection() {
 
                 <div>
                   <p className="text-lg font-bold text-slate-900 md:text-2xl">
-                    Hingga 177 Mbps
+                    Helpdesk PerumNet
                   </p>
 
-                  <p className="text-sm text-[#556679]">
-                    Unlimited Fiber Optic
-                  </p>
+                  <p className="text-sm text-[#556679]">{siteConfig.phone}</p>
                 </div>
               </div>
             </motion.div>

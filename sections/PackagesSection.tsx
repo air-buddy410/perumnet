@@ -17,30 +17,40 @@ export function PackagesSection() {
             description="PerumNet menyediakan berbagai pilihan paket internet fiber optic yang cepat, stabil, dan terjangkau untuk rumah maupun bisnis."
           />
 
-          <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {packages.map((item, index) => (
-              <PackageCard
-                key={item.name}
-                name={item.name}
-                speed={item.speed}
-                price={item.price}
-                features={item.features}
-                popular={item.popular}
-                note={item.note}
-                index={index}
-              />
-            ))}
+          <div className="mx-auto max-w-6xl">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {packages.map((item, index) => (
+                <div
+                  key={item.name}
+                  className={index >= 3 ? "lg:col-span-1" : ""}
+                >
+                  <PackageCard
+                    name={item.name}
+                    speed={item.speed}
+                    price={item.price}
+                    features={item.features}
+                    popular={item.popular}
+                    note={item.note}
+                    index={index}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-16 text-center">
-            <p className="mb-4 text-[#556679]">
-              Tidak menemukan paket yang sesuai? Kami siap membantu memilih
-              paket terbaik sesuai kebutuhan Anda.
+          <div className="mx-auto mt-16 max-w-4xl rounded-3xl bg-[#00a79d]/10 p-8 text-center md:p-10">
+            <h3 className="mb-3 text-2xl font-bold text-slate-900">
+              Belum Menemukan Paket yang Sesuai?
+            </h3>
+
+            <p className="mx-auto mb-6 max-w-2xl leading-7 text-[#556679]">
+              Tim PerumNet siap membantu memilih paket internet terbaik sesuai
+              kebutuhan rumah, bisnis, maupun area pemasangan Anda.
             </p>
 
             <a
               href="#contact"
-              className="font-semibold text-[#00a79d] underline transition hover:opacity-80"
+              className="inline-flex items-center justify-center rounded-xl bg-[#00a79d] px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-[#008f86]"
             >
               Diskusi Paket Custom →
             </a>

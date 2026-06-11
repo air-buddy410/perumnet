@@ -30,7 +30,7 @@ export function PackageCard({
 
   return (
     <div
-      className={`relative flex flex-col rounded-3xl bg-white p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+      className={`relative flex h-full min-h-[680px] flex-col rounded-3xl bg-white p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
         popular
           ? "border-2 border-[#00a79d] shadow-2xl"
           : "border border-[#00a79d]/10 shadow-sm"
@@ -75,23 +75,27 @@ export function PackageCard({
         Berlangganan Sekarang
       </a>
 
-      <div className="flex-grow space-y-3">
-        {features.map((feature) => (
-          <div key={feature} className="flex items-start gap-3">
-            <div className="mt-0.5 flex-shrink-0 rounded-full bg-[#00a79d] p-1">
-              <Check className="h-3 w-3 text-white" />
+      <div className="flex flex-1 flex-col">
+        <div className="min-h-[260px] space-y-3">
+          {features.map((feature) => (
+            <div key={feature} className="flex items-start gap-3">
+              <div className="mt-0.5 flex-shrink-0 rounded-full bg-[#00a79d] p-1">
+                <Check className="h-3 w-3 text-white" />
+              </div>
+
+              <span className="text-sm leading-6 text-[#556679]">
+                {feature}
+              </span>
             </div>
-
-            <span className="text-sm leading-6 text-[#556679]">{feature}</span>
-          </div>
-        ))}
-      </div>
-
-      {note && (
-        <div className="mt-4 border-t border-slate-100 pt-4">
-          <p className="text-xs italic text-[#556679]">*{note}</p>
+          ))}
         </div>
-      )}
+
+        {note && (
+          <div className="mt-auto border-t border-slate-100 pt-4">
+            <p className="text-xs italic leading-5 text-[#556679]">*{note}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
