@@ -38,11 +38,16 @@ body {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
 }
 
 .animate-partner-scroll {
-  animation: partner-scroll 25s linear infinite;
+  animation: partner-scroll 28s linear infinite;
+}
+
+.animate-partner-scroll:hover {
+  animation-play-state: paused;
 }
