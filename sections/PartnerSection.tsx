@@ -11,18 +11,22 @@ const partners = [
   {
     name: "Akata Konstruksi",
     logo: "/images/partners/Akata 2.png",
+    large: true,
   },
   {
     name: "Arbit",
     logo: "/images/partners/Arbit 2.png",
+    large: true,
   },
   {
     name: "Quenzo",
     logo: "/images/partners/Quenzo Logo.PNG",
+    imageBackground: true,
   },
   {
     name: "Paborito Coffee",
     logo: "/images/partners/Paborito.jpeg",
+    large: true,
   },
   {
     name: "AlusNet",
@@ -61,8 +65,8 @@ export function PartnersSection() {
                   key={`${partner.name}-${index}`}
                   className="
                   flex
-                  h-32
-                  w-56
+                  h-36
+                  w-64
                   shrink-0
                   items-center
                   justify-center
@@ -70,28 +74,33 @@ export function PartnersSection() {
                   bg-white
                   p-6
                   shadow-lg
-                  shadow-slate-200/80
                   transition-all
                   duration-300
                   hover:-translate-y-1
                   hover:shadow-xl
-                  md:h-36
-                  md:w-64
                 "
                 >
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    width={220}
-                    height={120}
-                    className="
-    max-h-20
-    max-w-[180px]
-    object-contain
-    md:max-h-24
-    md:max-w-[220px]
-  "
-                  />
+                  <div
+                    className={`
+                    flex
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    p-3
+                    ${partner.imageBackground ? "bg-slate-900" : ""}
+                  `}
+                  >
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name}
+                      width={220}
+                      height={120}
+                      className={`
+      object-contain
+      ${partner.large ? "max-h-28 max-w-[260px]" : "max-h-20 max-w-[180px]"}
+    `}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
