@@ -53,20 +53,20 @@ export async function POST(req: Request) {
     }
 
     await resend.emails.send({
-      from: "Maharani Internet <onboarding@resend.dev>",
+      from: "Perumnet <onboarding@resend.dev>",
       to: email,
-      subject: "Terima kasih telah menghubungi Maharani Internet",
+      subject: "Terima kasih telah menghubungi Perumnet",
       html: `
         <h2>Halo ${name},</h2>
-        <p>Terima kasih telah menghubungi Maharani Internet.</p>
+        <p>Terima kasih telah menghubungi Perumnet.</p>
         <p>Tim kami akan segera menghubungi Anda melalui email atau telepon.</p>
         <br/>
-        <p>Salam,<br/>Maharani Internet</p>
+        <p>Salam,<br/>Perumnet</p>
       `,
     });
 
     await resend.emails.send({
-      from: "Maharani Internet <onboarding@resend.dev>",
+      from: "Perumnet <onboarding@resend.dev>",
       to: process.env.ADMIN_EMAIL!,
       subject: `Lead Baru dari Website - ${name}`,
       html: `
