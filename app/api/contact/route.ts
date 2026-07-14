@@ -13,7 +13,7 @@ export async function POST(req: Request) {
           success: false,
           message: "Name, email, and message are required.",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
           success: false,
           message: "Google Script URL is not configured.",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
           success: false,
           message: "Failed to save inquiry to Google Sheet.",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -80,7 +80,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Inquiry saved to Google Sheet and email sent successfully.",
+      message:
+        "Your inquiry has been submitted successfully. We'll get back to you soon.",
     });
   } catch (error) {
     console.error("Contact API error:", error);
@@ -90,7 +91,7 @@ export async function POST(req: Request) {
         success: false,
         message: "Something went wrong.",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -1,10 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, Mail, MapPin, Phone, Send, UserRound } from "lucide-react";
+import {
+  AlertCircle,
+  CheckCircle2,
+  Clock,
+  Loader2,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  UserRound,
+} from "lucide-react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Reveal } from "@/components/Reveal";
 import { siteConfig } from "@/data/site";
+
+type SubmitStatus = {
+  type: "success" | "error";
+  message: string;
+} | null;
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -14,21 +29,51 @@ export function ContactSection() {
     message: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (submitStatus) {
+      setSubmitStatus(null);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
-    const result = await response.json();
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (result.success) {
-      alert("Pesan berhasil dikirim!");
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Pesan gagal dikirim. Silakan coba lagi.",
+        );
+      }
+
+      setSubmitStatus({
+        type: "success",
+        message: result.message || "Pesan berhasil dikirim!",
+      });
 
       setFormData({
         name: "",
@@ -36,6 +81,18 @@ export function ContactSection() {
         phone: "",
         message: "",
       });
+    } catch (error) {
+      console.error("Contact form error:", error);
+
+      setSubmitStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Terjadi kesalahan. Silakan coba lagi.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -68,57 +125,90 @@ export function ContactSection() {
                   <FormField label="Nama Lengkap">
                     <input
                       type="text"
+                      name="name"
                       placeholder="Masukkan nama Anda"
                       value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      className="w-full rounded-xl border border-slate-200 px-4 py-3.5 outline-none transition focus:border-[#00a79d] focus:ring-2 focus:ring-[#00a79d]/20"
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full rounded-xl border border-slate-200 px-4 py-3.5 outline-none transition focus:border-[#00a79d] focus:ring-2 focus:ring-[#00a79d]/20 disabled:cursor-not-allowed disabled:bg-slate-100"
                     />
                   </FormField>
 
                   <FormField label="Email">
                     <input
                       type="email"
+                      name="email"
                       placeholder="email@example.com"
                       value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      className="w-full rounded-xl border border-slate-200 px-4 py-3.5 outline-none transition focus:border-[#00a79d] focus:ring-2 focus:ring-[#00a79d]/20"
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full rounded-xl border border-slate-200 px-4 py-3.5 outline-none transition focus:border-[#00a79d] focus:ring-2 focus:ring-[#00a79d]/20 disabled:cursor-not-allowed disabled:bg-slate-100"
                     />
                   </FormField>
 
                   <FormField label="Nomor Telepon">
                     <input
                       type="tel"
+                      name="phone"
                       placeholder="08xx-xxxx-xxxx"
                       value={formData.phone}
-                      onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
-                      }
-                      className="w-full rounded-xl border border-slate-200 px-4 py-3.5 outline-none transition focus:border-[#00a79d] focus:ring-2 focus:ring-[#00a79d]/20"
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className="w-full rounded-xl border border-slate-200 px-4 py-3.5 outline-none transition focus:border-[#00a79d] focus:ring-2 focus:ring-[#00a79d]/20 disabled:cursor-not-allowed disabled:bg-slate-100"
                     />
                   </FormField>
 
                   <FormField label="Pesan">
                     <textarea
                       rows={4}
+                      name="message"
                       placeholder="Tuliskan pesan Anda di sini..."
                       value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      className="w-full resize-none rounded-xl border border-slate-200 px-4 py-3.5 outline-none transition focus:border-[#00a79d] focus:ring-2 focus:ring-[#00a79d]/20"
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full resize-none rounded-xl border border-slate-200 px-4 py-3.5 outline-none transition focus:border-[#00a79d] focus:ring-2 focus:ring-[#00a79d]/20 disabled:cursor-not-allowed disabled:bg-slate-100"
                     />
                   </FormField>
 
+                  {submitStatus && (
+                    <div
+                      role="alert"
+                      aria-live="polite"
+                      className={`flex items-start gap-3 rounded-xl border p-4 text-sm ${
+                        submitStatus.type === "success"
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                          : "border-red-200 bg-red-50 text-red-700"
+                      }`}
+                    >
+                      {submitStatus.type === "success" ? (
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+                      ) : (
+                        <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+                      )}
+
+                      <p>{submitStatus.message}</p>
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center rounded-xl bg-[#00a79d] px-4 py-4 text-base font-semibold text-white transition hover:bg-[#008f86]"
+                    disabled={isSubmitting}
+                    className="flex w-full items-center justify-center rounded-xl bg-[#00a79d] px-4 py-4 text-base font-semibold text-white transition hover:bg-[#008f86] disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    <Send className="mr-2 h-5 w-5" />
-                    Kirim Pesan
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Mengirim...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-5 w-5" />
+                        Kirim Pesan
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
