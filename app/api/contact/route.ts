@@ -18,12 +18,23 @@ export async function POST(req: Request) {
     }
 
     const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
+    const adminEmail = process.env.ADMIN_EMAIL;
 
     if (!googleScriptUrl) {
       return NextResponse.json(
         {
           success: false,
           message: "Google Script URL is not configured.",
+        },
+        { status: 500 },
+      );
+    }
+
+    if (!adminEmail) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Admin email is not configured.",
         },
         { status: 500 },
       );
@@ -46,28 +57,45 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          message: "Failed to save inquiry to Google Sheet.",
+          message: "Failed to save inquiry.",
         },
         { status: 500 },
       );
     }
 
-    await resend.emails.send({
-      from: "Helpdesk Perumnet <helpdesk@perumnet.id ",
+    const customerEmailResult = await resend.emails.send({
+      from: "Helpdesk Perumnet <helpdesk@perumnet.id>",
       to: email,
       subject: "Terima kasih telah menghubungi Perumnet",
       html: `
         <h2>Halo ${name},</h2>
         <p>Terima kasih telah menghubungi Perumnet.</p>
         <p>Tim kami akan segera menghubungi Anda melalui email atau telepon.</p>
-        <br/>
-        <p>Salam,<br/>Perumnet</p>
+        <br />
+        <p>Salam,<br />Perumnet</p>
       `,
     });
 
-    await resend.emails.send({
-      from: "System Perumnet <onboarding@resend.dev>",
-      to: process.env.ADMIN_EMAIL!,
+    if (customerEmailResult.error) {
+      console.error(
+        "Failed to send customer email:",
+        customerEmailResult.error,
+      );
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Failed to send confirmation email.",
+          error: customerEmailResult.error.message,
+        },
+        { status: 500 },
+      );
+    }
+
+    const adminEmailResult = await resend.emails.send({
+      from: "System Perumnet <helpdesk@perumnet.id>",
+      to: adminEmail,
+      replyTo: email,
       subject: `Lead Baru dari Website - ${name}`,
       html: `
         <h2>Lead Baru dari Website</h2>
@@ -77,6 +105,22 @@ export async function POST(req: Request) {
         <p><strong>Pesan:</strong> ${message}</p>
       `,
     });
+
+    if (adminEmailResult.error) {
+      console.error("Failed to send admin email:", adminEmailResult.error);
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Failed to send notification email.",
+          error: adminEmailResult.error.message,
+        },
+        { status: 500 },
+      );
+    }
+
+    console.log("Customer email sent:", customerEmailResult.data);
+    console.log("Admin email sent:", adminEmailResult.data);
 
     return NextResponse.json({
       success: true,
@@ -89,7 +133,8 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         success: false,
-        message: "Something went wrong.",
+        message:
+          error instanceof Error ? error.message : "Something went wrong.",
       },
       { status: 500 },
     );
