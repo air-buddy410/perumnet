@@ -30,7 +30,7 @@ export function Navbar() {
             ))}
 
             <a
-              href={`https://wa.me/62${siteConfig.phone.slice(1)}`}
+              href={`https://wa.me/${siteConfig.adminWhatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-md bg-[#00a79d] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#008d84]"

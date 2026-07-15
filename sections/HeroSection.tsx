@@ -76,7 +76,7 @@ export function HeroSection() {
                   >
                     {item}
                   </span>
-                )
+                ),
               )}
             </motion.div>
 
