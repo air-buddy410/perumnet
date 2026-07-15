@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     }
 
     await resend.emails.send({
-      from: "Perumnet <onboarding@resend.dev>",
+      from: "Helpdesk Perumnet <helpdesk@perumnet.id ",
       to: email,
       subject: "Terima kasih telah menghubungi Perumnet",
       html: `
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     });
 
     await resend.emails.send({
-      from: "Perumnet <onboarding@resend.dev>",
+      from: "System Perumnet <onboarding@resend.dev>",
       to: process.env.ADMIN_EMAIL!,
       subject: `Lead Baru dari Website - ${name}`,
       html: `
