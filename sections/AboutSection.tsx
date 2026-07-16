@@ -122,13 +122,13 @@ export function AboutSection() {
             {benefits.map((benefit) => (
               <div
                 key={benefit}
-                className="rounded-2xl border border-[#00a79d]/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#00a79d]/20 hover:shadow-lg"
+                className="flex items-start gap-5 rounded-2xl border border-[#00a79d]/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#00a79d]/20 hover:shadow-lg"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#00a79d]/10">
-                  <BadgeCheck className="h-6 w-6 text-[#00a79d]" />
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#00a79d]/10">
+                  <BadgeCheck className="h-7 w-7 text-[#00a79d]" />
                 </div>
 
-                <p className="font-medium leading-7 text-slate-700">
+                <p className="pt-1 text-lg font-medium leading-8 text-slate-700">
                   {benefit}
                 </p>
               </div>
